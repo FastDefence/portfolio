@@ -2,16 +2,18 @@ services:
   front:
     build:
       context: ./front
-      dockerfile: prod.Dockerfile
+      dockerfile: Dockerfile
     volumes:
       - type: bind
         source: ./front
         target: /app
-      - type: bind
-        source: ./front/node_modules
+      - type: volume
         target: /app/node_modules
-    networks:
-      - microfrontends
-    command: ["npm", "run", "dev"]
+      - type: volume
+        target: /app/.next
     ports:
-      - 1234:1234
+      - 3000:3000
+
+volumes:
+  front_node_modules:
+  front_next:

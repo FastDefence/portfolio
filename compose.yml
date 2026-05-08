@@ -1,0 +1,17 @@
+services:
+  front:
+    build:
+      context: ./front
+      dockerfile: prod.Dockerfile
+    volumes:
+      - type: bind
+        source: ./front
+        target: /app
+      - type: bind
+        source: ./front/node_modules
+        target: /app/node_modules
+    networks:
+      - microfrontends
+    command: ["npm", "run", "dev"]
+    ports:
+      - 1234:1234

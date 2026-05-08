@@ -1,9 +1,20 @@
-# front-Docker環境構築:
+# front:
 - 公式Doc：https://nextjs.org/docs/app/getting-started/installation
 - チートシート？:https://qiita.com/Sicut_study/items/2c9df846e96a47900e6d
 - Next on Docker:https://qiita.com/Yasushi-Mo/items/011e021b528b073d7099
+1. プロジェクト作成
+2. app/page.tsx を作る
+3. app/users/page.tsx を作る
+4. app/users/[id]/page.tsx を作る
+5. layout.tsx で共通レイアウトを作る
+6. "use client" のボタンを1個だけ作る
+7. app/api/users/route.ts を作る
+8. Server ComponentからそのAPIを叩く
+9. middleware.ts で /users を保護する
+10. 最後にDockerでself-hosted起動する
 
-## Q&A
+
+## Docker環境構築
 
 ### Q. なぜ Dockerfile で COPY だけでなく、compose.yml で bind するのか
 - **Dockerfile** → Image にコードを焼く（本番用）

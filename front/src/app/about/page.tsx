@@ -2,7 +2,7 @@ export default function AboutPage() {
   return (
     <div className="mx-4 rounded-3xl border p-6 shadow-md">
       <div className="mb-4">
-        <h2 className="inline-block border-b border-slate-500 text-3xl font-bold text-white transition hover:text-amber-400">
+        <h2 className="inline-block border-b border-slate-500 text-3xl font-bold text-white">
           名前
         </h2>
         <p className="mt-4 text-2xl">
@@ -11,7 +11,7 @@ export default function AboutPage() {
       </div>
 
       <div className="mb-4">
-        <h2 className="inline-block border-b border-slate-500 text-3xl font-bold text-white transition hover:text-amber-400">
+        <h2 className="inline-block border-b border-slate-500 text-3xl font-bold text-white">
           所属
         </h2>
         <p className="mt-4 text-2xl">
@@ -23,7 +23,7 @@ export default function AboutPage() {
       </div>
 
       <div className="mb-4">
-        <h2 className="inline-block border-b border-slate-500 text-3xl font-bold text-white transition hover:text-amber-400">
+        <h2 className="inline-block border-b border-slate-500 text-3xl font-bold text-white">
           趣味
         </h2>
         <p className="mt-4 text-2xl">
@@ -32,7 +32,7 @@ export default function AboutPage() {
       </div>
 
       <div className="mb-4">
-        <h2 className="inline-block border-b border-slate-500 text-3xl font-bold text-white transition hover:text-amber-400">
+        <h2 className="inline-block border-b border-slate-500 text-3xl font-bold text-white">
           気になる分野
         </h2>
         <p className="mt-4 text-2xl">

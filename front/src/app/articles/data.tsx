@@ -2,6 +2,7 @@ export type Article = {
     id: number;
     tags: string[];
     published: string;
+    updated: string;
     references: {
         title: string;
         url: string;
@@ -14,20 +15,22 @@ export const articles: Article[] = [
     {
         id: 1,
         tags: ["Ramen", "Yamaokaya"],
-        published: "2026-05-18T18:53:00+09:00",
+        published: "2026-05-18",
+        updated: "2026-05-20",
         references : [
             {
                 title: "山岡家",
                 url: "https://www.yamaokaya.com/"
             },
         ],
-        title: "山岡家背油トッピング",
-        text: "山岡家は食べ過ぎると腹壊します",
+        title: "山岡家背脂トッピング",
+        text: "## 山岡家は食べ過ぎると腹壊します。\n\n| tokuseimiso |\n| --- |\n| 特製味噌 |\n\n![山岡家のラーメン](https://images.unsplash.com/photo-1569718212165-3a8278d5f624)\n\n背脂トッピングは満足度が高いですが、食べすぎ注意です。\n",
     },
     {
         id: 2,
-        tags: ["Burger"],
-        published: "2026-05-19T18:53:00+09:00",
+        tags: ["Burger", "MCDonald"],
+        published: "2026-05-19",
+        updated: "2026-05-20",
         references : [
             {
                 title: "マクドナルド",
@@ -35,7 +38,7 @@ export const articles: Article[] = [
             },
         ],
         title: "ビッグマックセットポテトL",
-        text: "マクドナルドは食べ過ぎると胃がおかしくなります"
+        text: "マクドナルドは食べ過ぎると胃壊します。\n\nおわかり？",
     },
 ]
 

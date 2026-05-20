@@ -1,0 +1,13 @@
+CREATE TABLE IF NOT EXISTS article_references (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    article_id INT NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    url TEXT NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_article_references_article
+        FOREIGN KEY (article_id)
+        REFERENCES articles(id)
+        ON DELETE CASCADE
+);

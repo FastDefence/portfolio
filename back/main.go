@@ -89,14 +89,7 @@ func connectDB() (*sql.DB, error) {
 	port := getEnv("MYSQL_PORT", "3306")
 	database := getEnv("MYSQL_DATABASE", "portfolio_db")
 
-	dsn := fmt.Sprintf(
-		"%s:%s@tcp(%s:%s)/%s?parseTime=true&loc=Asia%%2FTokyo",
-		user,
-		password,
-		host,
-		port,
-		database,
-	)
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true&loc=Asia%%2FTokyo", user, password, host, port, database)
 
 	db, err := sql.Open("mysql", dsn)
 	if err != nil {

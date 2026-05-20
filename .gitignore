@@ -1,0 +1,107 @@
+# --------------------
+# OS / Editor
+# --------------------
+.DS_Store
+Thumbs.db
+
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+.idea/
+
+# --------------------
+# Environment variables
+# --------------------
+.env
+.env.local
+.env.*.local
+
+# 必要なら共有用テンプレートだけ管理する
+!.env.example
+
+# --------------------
+# Logs
+# --------------------
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# --------------------
+# Next.js / React
+# --------------------
+node_modules/
+.next/
+out/
+build/
+dist/
+
+.vercel/
+
+next-env.d.ts
+
+# TypeScript
+*.tsbuildinfo
+
+# ESLint / Prettier cache
+.eslintcache
+.prettiercache
+
+# package manager cache
+.pnpm-store/
+.yarn/cache/
+.yarn/unplugged/
+.yarn/build-state.yml
+.yarn/install-state.gz
+
+# --------------------
+# Go
+# --------------------
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+*.test
+*.out
+
+coverage.out
+coverage.html
+
+bin/
+tmp/
+
+# Go workspace
+go.work
+go.work.sum
+
+# Air live reload
+.air.toml
+tmp/
+
+# --------------------
+# Docker
+# --------------------
+docker-compose.override.yml
+
+# ローカルDBやボリュームをディレクトリで持つ場合
+mysql/data/
+mysql/tmp/
+db/data/
+data/
+
+# --------------------
+# MySQL
+# --------------------
+*.sql.bak
+*.dump
+
+# --------------------
+# Misc
+# --------------------
+.cache/
+.env

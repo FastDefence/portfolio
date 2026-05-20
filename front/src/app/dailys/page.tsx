@@ -1,5 +1,10 @@
-export default function Articles(){
-    <div className="txt-2xl">
-        日記一覧
-    </div>
+export default function Dailies(){
+    return(
+        <div>
+            <div className="text-3xl font-bold">
+                日記一覧
+            </div>
+            <p>coming soon...</p>
+        </div>
+    );
 }

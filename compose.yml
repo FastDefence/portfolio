@@ -17,7 +17,36 @@ services:
     command: sh -c "npm install && npm run dev"
     ports:
       - 3000:3000
+    restart: unless-stopped
+  api:
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./back:/app
+      - go-mod-cache:/go/pkg/mod
+    env_file:
+      - ./back/.env
+    depends_on:
+      - mysql
+    restart: unless-stopped
+
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: portfolio_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    restart: unless-stopped
+  
 
 volumes:
   front_node_modules:
   front_next:
+  mysql-data:
+  go-mod-cache:

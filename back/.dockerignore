@@ -1,0 +1,13 @@
+.git
+.gitignore
+
+tmp/
+bin/
+
+*.log
+
+.env
+.env.local
+
+mysql/data/
+mysql/tmp/

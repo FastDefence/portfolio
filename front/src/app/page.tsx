@@ -1,7 +1,9 @@
 export default function Home(){
   return (
     <div>
-      <h1>Topページ</h1>
+      <div className="text-3xl font-bold">
+        Topページ
+      </div>
     </div>
   )
 }

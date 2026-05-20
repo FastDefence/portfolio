@@ -6,7 +6,7 @@ export default async function Articles(){
 
     return (
         <div>
-            <div className="text-3xl font-bold">
+            <div className="text-3xl font-bold mb-4">
                 記事一覧
             </div>
             

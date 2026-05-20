@@ -1,6 +1,10 @@
 export default function SNSPage() {
   return (
     <div>
+      <div className="text-3xl font-bold mb-4">
+        SNS
+      </div>
+
       <div className="mx-4 my-4 rounded-3xl border p-6 shadow-md">
         <a
           href="https://github.com/FastDefence"

@@ -5,4 +5,32 @@ services:
       dockerfile: prod.Dockerfile
     ports:
       - 3000:3000
-    
+  api:
+    build:
+      context: ./back
+      dockerfile: prod.Dockerfile
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./back/.env
+    depends_on:
+      mysql:
+        condition: service_healthy
+    restart: unless-stopped
+
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: portfolio_db
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+volumes:
+  mysql-data:

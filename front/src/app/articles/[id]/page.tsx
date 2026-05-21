@@ -26,7 +26,7 @@ export default async function ArticlesID({ params }: ArticlePageProps){
                         <div key="{tag.id}" className="rounded-full border border-gray-400 px-2">{tag}</div>
                     ))}
                 </div>
-                <div className="mr-2">published: {article.published}</div>
+                <div className="mr-2">created: {article.created}</div>
                 <div className="mr-2">updated: {article.updated}</div>
                 <div className="flex">
                     <p className="mr-2">references:</p>

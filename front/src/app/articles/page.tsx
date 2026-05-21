@@ -24,7 +24,7 @@ export default async function Articles(){
                                 <div key="{tag.id}" className="rounded-full border border-gray-400 px-2">{tag}</div>
                             ))}
                         </div>
-                        <p className="text-gray-400 mb-2">作成日:{article.published}</p>
+                        <p className="text-gray-400 mb-2">作成日:{article.created}</p>
                         <p className="text-gray-400 mb-2">更新日:{article.updated}</p>
                     </div>
                 ))}

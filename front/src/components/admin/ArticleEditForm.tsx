@@ -46,7 +46,8 @@ export default function ArticleEditForm({ article }: ArticleEditFormProps) {
         setIsSaving(false);
 
         if (!response.ok) {
-            setMessage("保存に失敗しました");
+            const responseText = await response.text();
+            setMessage(`保存に失敗しました status=${response.status} body=${responseText}`);
             return;
         }
 
@@ -54,34 +55,65 @@ export default function ArticleEditForm({ article }: ArticleEditFormProps) {
         router.refresh();
     }
 
+    async function handleDelete() {
+        const confirmed = window.confirm("この記事を削除しますか？");
+
+        if (!confirmed) {
+            return;
+        }
+
+        const response = await fetch(`${API_BASE_URL}/articles/${article.id}`, {
+            method: "DELETE",
+        });
+
+        if (!response.ok) {
+            const responseText = await response.text();
+            setMessage(`削除に失敗しました status=${response.status} body=${responseText}`);
+            return;
+        }
+
+        router.push("/admin/articles");
+        router.refresh();
+    }
+
     return (
-        <form onSubmit={handleSubmit}>
-            <ArticleDraftEditor
-                title={title}
-                text={text}
-                onTitleChange={setTitle}
-                onTextChange={setText}
-            />
-
-            <div className="my-6">
-                <button
-                    type="submit"
-                    disabled={isSaving}
-                    className="border border-gray-500 bg-gray-100 px-4 py-2 hover:bg-gray-200 disabled:opacity-50"
-                >
-                    {isSaving ? "保存中" : "記事本文を保存"}
-                </button>
-
-                {message && (
-                    <span className="ml-3 text-sm text-gray-600">
-                        {message}
-                    </span>
-                )}
-            </div>
-
+        <div>
             <TagSelector articleId={article.id} />
 
             <ReferenceEditor articleId={article.id} />
-        </form>
+
+            <form onSubmit={handleSubmit}>
+                <ArticleDraftEditor
+                    title={title}
+                    text={text}
+                    onTitleChange={setTitle}
+                    onTextChange={setText}
+                />
+
+                <div className="my-6">
+                    <button
+                        type="submit"
+                        disabled={isSaving}
+                        className="border border-gray-500 bg-gray-100 px-4 py-2 hover:bg-gray-200 disabled:opacity-50"
+                    >
+                        {isSaving ? "保存中" : "記事本文を保存"}
+                    </button>
+
+                    <button
+                        type="button"
+                        onClick={handleDelete}
+                        className="ml-2 border border-red-500 bg-red-50 px-4 py-2 text-red-700 hover:bg-red-100"
+                    >
+                        記事削除
+                    </button>
+
+                    {message && (
+                        <span className="ml-3 text-sm text-gray-600">
+                            {message}
+                        </span>
+                    )}
+                </div>
+            </form>
+        </div>
     );
 }

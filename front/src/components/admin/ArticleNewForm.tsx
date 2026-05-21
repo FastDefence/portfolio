@@ -102,19 +102,19 @@ export default function ArticleNewForm() {
 
     return (
         <form onSubmit={handleSubmit}>
-            <ArticleDraftEditor
-                title={title}
-                text={text}
-                onTitleChange={setTitle}
-                onTextChange={setText}
-            />
-
             <TagSelector
                 showSaveButton={false}
                 onChange={setSelectedTags}
             />
 
             <ReferenceDraftEditor onChange={setReferences} />
+
+            <ArticleDraftEditor
+                title={title}
+                text={text}
+                onTitleChange={setTitle}
+                onTextChange={setText}
+            />
 
             <div className="my-6">
                 <button

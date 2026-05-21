@@ -1,8 +1,6 @@
 import { notFound } from "next/navigation";
 import { getArticleById } from "@/app/articles/data";
-import ArticleEditForm from "../../../../components/admin/ArticleEditForm";
-import TagSelector from "../../../../components/admin/TagSelector";
-import ReferenceEditor from "../../../../components/admin/ReferenceEditor";
+import ArticleEditForm from "@/components/admin/ArticleEditForm";
 
 type AdminArticleEditPageProps = {
     params: Promise<{
@@ -24,9 +22,7 @@ export default async function AdminArticleEditPage({ params }: AdminArticleEditP
                 記事編集
             </h1>
 
-            <TagSelector articleId={article.id} />
-            <ReferenceEditor articleId={article.id} />
-            <ArticleEditForm article={article} />
+            <ArticleEditForm key={article.id} article={article} />
 
         </div>
     );

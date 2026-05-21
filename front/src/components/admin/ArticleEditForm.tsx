@@ -7,7 +7,7 @@ import ArticleDraftEditor from "@/components/admin/ArticleDraftEditor";
 import TagSelector from "@/components/admin/TagSelector";
 import ReferenceEditor from "@/components/admin/ReferenceEditor";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8080";
+const API_BASE_URL = "/api/backend";
 
 type ArticleEditFormProps = {
     article: Article;

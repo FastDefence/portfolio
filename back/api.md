@@ -1,8 +1,8 @@
 # DB Schemes
 ## articles
-| id | published | title | text |
-| ---- | ---- | ---- | ---- |
-| 1 | 2026-05-18 | 山岡家背油トッピング | ## 山岡家は食べ過ぎると腹壊します。\n\n| tokuseimiso |\n| --- |\n| 特製味噌 |\n\n![山岡家のラーメン](https://images.unsplash.com/photo-1569718212165-3a8278d5f624)\n\n背脂トッピングは満足度が高いですが、食べすぎ注意です。\n |
+| id | | title | text | created | updated |
+| ---- | ---- | ---- | ---- | ---- |
+| 1 | 山岡家背油トッピング | ## 山岡家は食べ過ぎると腹壊します。\n\n| tokuseimiso |\n| --- |\n| 特製味噌 |\n\n![山岡家のラーメン](https://images.unsplash.com/photo-1569718212165-3a8278d5f624)\n\n背脂トッピングは満足度が高いですが、食べすぎ注意です。\n | 2026-05-18 | 2026-05-20 |
 
 ## tags
 | id | name |
@@ -50,7 +50,6 @@ DELETE /references/:id　referenceの削除
     {
         id: 1,
         tags: ["Ramen", "Yamaokaya"],
-        published: "2026-05-18",
         references : [
             {
                 title: "山岡家",
@@ -59,4 +58,6 @@ DELETE /references/:id　referenceの削除
         ],
         title: "山岡家背油トッピング",
         text: "## 山岡家は食べ過ぎると腹壊します。\n\n| tokuseimiso |\n| --- |\n| 特製味噌 |\n\n![山岡家のラーメン](https://images.unsplash.com/photo-1569718212165-3a8278d5f624)\n\n背脂トッピングは満足度が高いですが、食べすぎ注意です。\n",
+        created: "2025-05-19",
+        updated: "2025-05-20",
     },

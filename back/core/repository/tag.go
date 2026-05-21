@@ -6,7 +6,7 @@ import (
 )
 
 type TagRepository interface {
-	FindAllTags() ([]domain.Tag, error)
+	FindAllTags(name string) ([]domain.Tag, error)
 	FindTagByID(tagID int) (*domain.Tag, error)
 	CreateTag(request domain.CreateTagRequest) (*domain.Tag, error)
 	UpdateTag(tagID int, request domain.UpdateTagRequest) (*domain.Tag, error)
@@ -23,16 +23,29 @@ func NewTagRepository(db *sql.DB) TagRepository {
 	}
 }
 
-func (repository *tagRepository) FindAllTags() ([]domain.Tag, error) {
-	rows, err := repository.db.Query(`
+func (repository *tagRepository) FindAllTags(name string) ([]domain.Tag, error) {
+	query := `
 		SELECT
 			id,
 			name,
 			DATE_FORMAT(created_at, '%Y%m%d') AS created_at,
 			DATE_FORMAT(updated_at, '%Y%m%d') AS updated_at
 		FROM tags
+	`
+
+	args := []any{}
+
+	if name != "" {
+		query += `
+			WHERE name LIKE ?
+		`
+		args = append(args, "%"+name+"%")
+	}
+	query += `
 		ORDER BY id ASC
-	`)
+	`
+
+	rows, err := repository.db.Query(query, args...)
 	if err != nil {
 		return nil, err
 	}

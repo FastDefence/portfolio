@@ -6,7 +6,7 @@ import (
 )
 
 type TagUsecase interface {
-	GetAllTags() ([]domain.Tag, error)
+	GetAllTags(name string) ([]domain.Tag, error)
 	GetTagByID(tagID int) (*domain.Tag, error)
 	PostTag(request domain.CreateTagRequest) (*domain.Tag, error)
 	PatchTag(tagID int, request domain.UpdateTagRequest) (*domain.Tag, error)
@@ -23,8 +23,8 @@ func NewTagUsecase(tagRepository repository.TagRepository) TagUsecase {
 	}
 }
 
-func (usecase *tagUsecase) GetAllTags() ([]domain.Tag, error) {
-	return usecase.tagRepository.FindAllTags()
+func (usecase *tagUsecase) GetAllTags(name string) ([]domain.Tag, error) {
+	return usecase.tagRepository.FindAllTags(name)
 }
 
 func (usecase *tagUsecase) GetTagByID(tagID int) (*domain.Tag, error) {

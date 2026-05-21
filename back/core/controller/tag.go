@@ -21,7 +21,9 @@ func NewTagController(tagUsecase usecase.TagUsecase) *TagController {
 }
 
 func (controller *TagController) GetAllTags(ctx echo.Context) error {
-	tags, err := controller.tagUsecase.GetAllTags()
+	name := ctx.QueryParam("name")
+
+	tags, err := controller.tagUsecase.GetAllTags(name)
 	if err != nil {
 		return ctx.JSON(http.StatusInternalServerError, map[string]string{
 			"message": "failed to get all tags",

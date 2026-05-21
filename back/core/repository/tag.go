@@ -28,8 +28,8 @@ func (repository *tagRepository) FindAllTags(name string) ([]domain.Tag, error) 
 		SELECT
 			id,
 			name,
-			DATE_FORMAT(created_at, '%Y%m%d') AS created_at,
-			DATE_FORMAT(updated_at, '%Y%m%d') AS updated_at
+			DATE_FORMAT(created_at, '%Y-%m-%d') AS created_at,
+			DATE_FORMAT(updated_at, '%Y-%m-%d') AS updated_at
 		FROM tags
 	`
 
@@ -83,8 +83,8 @@ func (repository *tagRepository) FindTagByID(tagID int) (*domain.Tag, error) {
 		SELECT
 			id,
 			name,
-			DATE_FORMAT(created_at, '%Y%m%d') AS created_at,
-			DATE_FORMAT(updated_at, '%Y%m%d') AS updated_at
+			DATE_FORMAT(created_at, '%Y-%m-%d') AS created_at,
+			DATE_FORMAT(updated_at, '%Y-%m-%d') AS updated_at
 		FROM tags
 		WHERE id = ?
 	`, tagID).Scan(

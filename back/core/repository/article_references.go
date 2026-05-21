@@ -40,8 +40,8 @@ func (repository *referenceRepository) FindReferencesByArticleID(articleID int) 
 			article_id,
 			title,
 			url,
-			DATE_FORMAT(created_at, '%Y%m%d') AS created_at,
-			DATE_FORMAT(updated_at, '%Y%m%d') AS updated_at
+			DATE_FORMAT(created_at, '%Y-%m-%d') AS created_at,
+			DATE_FORMAT(updated_at, '%Y-%m-%d') AS updated_at
 		FROM article_references
 		WHERE article_id = ?
 		ORDER BY id ASC
@@ -135,8 +135,8 @@ func (repository *referenceRepository) findReferenceByID(referenceID int) (*doma
 			article_id,
 			title,
 			url,
-			DATE_FORMAT(created_at, '%Y%m%d') AS created_at,
-			DATE_FORMAT(updated_at, '%Y%m%d') AS updated_at
+			DATE_FORMAT(created_at, '%Y-%m-%d') AS created_at,
+			DATE_FORMAT(updated_at, '%Y-%m-%d') AS updated_at
 		FROM article_references
 		WHERE id = ?
 	`, referenceID).Scan(

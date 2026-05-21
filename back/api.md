@@ -1,6 +1,56 @@
+# DB literals
+mysql> show tables;
++------------------------+
+| Tables_in_portfolio_db |
++------------------------+
+| article_references     |
+| article_tags           |
+| articles               |
+| tags                   |
++------------------------+
+4 rows in set (0.05 sec)
+
+mysql> select * from articles;
++----+-------+------+---------------------+---------------------+
+| id | title | text | created_at          | updated_at          |
++----+-------+------+---------------------+---------------------+
+|  1 | title | text | 2026-05-21 04:18:55 | 2026-05-21 04:18:55 |
+|  2 | title | text | 2026-05-21 09:51:36 | 2026-05-21 09:51:36 |
++----+-------+------+---------------------+---------------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from tags;
++----+-----------+---------------------+---------------------+
+| id | name      | created_at          | updated_at          |
++----+-----------+---------------------+---------------------+
+|  2 | Yamaokaya | 2026-05-21 03:44:35 | 2026-05-21 03:44:35 |
+|  3 | Ramenu    | 2026-05-21 04:18:06 | 2026-05-21 04:43:59 |
+|  5 | Ramene    | 2026-05-21 04:57:55 | 2026-05-21 04:57:55 |
++----+-----------+---------------------+---------------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from article_tags;
++------------+--------+
+| article_id | tag_id |
++------------+--------+
+|          1 |      2 |
+|          1 |      3 |
+|          2 |      3 |
++------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from article_references;
++----+------------+-------+--------------------------------------+---------------------+---------------------+
+| id | article_id | title | url                                  | created_at          | updated_at          |
++----+------------+-------+--------------------------------------+---------------------+---------------------+
+|  2 |          1 | ???   | https://www.instagram.com/takeokaya/ | 2026-05-21 10:26:06 | 2026-05-21 10:26:06 |
+|  3 |          1 | ???   | https://www.yamaokaya.com/           | 2026-05-21 10:26:39 | 2026-05-21 10:26:39 |
++----+------------+-------+--------------------------------------+---------------------+---------------------+
+2 rows in set (0.00 sec)
+
 # DB Schemes
 ## articles
-| id | title | text | created | updated |
+| id | title | text | created_at | updated_at |
 | ---- | ---- | ---- | ---- | ---- |
 | 1 | 山岡家背油トッピング | Markdown | 2026-05-18 | 2026-05-20 |
 
@@ -75,7 +125,7 @@ Paramでarticle idを送り、articleに紐づいているTag[]型のJSONを返�
 UpdateArticleTagsRequest型JSONでタグid配列を送り、更新後にarticleに紐づいているTag[]型のJSONを返す。  
 bodyなしの場合は400 Bad Requestを返す。  
 `tag_ids: []` の場合は、articleに紐づくtagをすべて解除する。  
-**動作確認:** `Invoke-RestMethod -Method Put -Uri "http://localhost:8080/articles/1/tags" -ContentType "application/json" -Body (@{ tag_ids = @(3, 5) } | ConvertTo-Json)`
+**動作確認:** `Invoke-RestMethod -Method Put -Uri "http://localhost:8080/articles/1/tags" -ContentType "application/json" -Body (@{ tag_ids = @(1) } | ConvertTo-Json)`
 
 メモ
 記事編集画面を開く

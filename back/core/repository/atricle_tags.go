@@ -25,8 +25,8 @@ func (repository *articleTagRepository) FindTagsByArticleID(articleID int) ([]do
 		SELECT
 			tags.id,
 			tags.name,
-			DATE_FORMAT(tags.created_at, '%Y%m%d') AS created_at,
-			DATE_FORMAT(tags.updated_at, '%Y%m%d') AS updated_at
+			DATE_FORMAT(tags.created_at, '%Y-%m-%d') AS created_at,
+			DATE_FORMAT(tags.updated_at, '%Y-%m-%d') AS updated_at
 		FROM article_tags
 		INNER JOIN tags
 			ON article_tags.tag_id = tags.id

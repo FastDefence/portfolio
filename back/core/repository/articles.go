@@ -34,8 +34,8 @@ func (repository *articleRepository) FindAllArticles(keyword string) ([]domain.A
 			id,
 			title,
 			text,
-			DATE_FORMAT(created_at, '%Y%m%d') AS created_at,
-			DATE_FORMAT(updated_at, '%Y%m%d') AS updated_at
+			DATE_FORMAT(created_at, '%Y-%m-%d') AS created_at,
+			DATE_FORMAT(updated_at, '%Y-%m-%d') AS updated_at
 		FROM articles
 	`
 
@@ -93,8 +93,8 @@ func (repository *articleRepository) FindArticleByID(articleID int) (*domain.Art
 			id,
 			title,
 			text,
-			DATE_FORMAT(created_at, '%Y%m%d') AS created_at,
-			DATE_FORMAT(updated_at, '%Y%m%d') AS updated_at
+			DATE_FORMAT(created_at, '%Y-%m-%d') AS created_at,
+			DATE_FORMAT(updated_at, '%Y-%m-%d') AS updated_at
 		FROM articles
 		WHERE id = ?
 	`, articleID).Scan(

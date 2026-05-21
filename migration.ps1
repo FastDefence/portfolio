@@ -13,7 +13,7 @@ $MigrationFiles = @(
     "01_articles.sql",
     "02_tags.sql",
     "03_article_tags.sql",
-    "04_references.sql"
+    "04_article_references.sql"
 )
 
 Write-Host "Start migration..."

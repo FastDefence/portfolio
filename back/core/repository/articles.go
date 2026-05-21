@@ -129,22 +129,13 @@ func (repository *articleRepository) CreateArticle(request domain.CreateArticleR
 }
 
 func (repository *articleRepository) UpdateArticle(articleID int, request domain.UpdateArticleRequest) (*domain.Article, error) {
-	result, err := repository.db.Exec(`
+	_, err := repository.db.Exec(`
 		UPDATE articles
-		SET title = ?, text = ?
+		SET title = ?, text = ?, updated_at = CURRENT_TIMESTAMP
 		WHERE id = ?
 	`, request.Title, request.Text, articleID)
 	if err != nil {
 		return nil, err
-	}
-
-	affectedRows, err := result.RowsAffected()
-	if err != nil {
-		return nil, err
-	}
-
-	if affectedRows == 0 {
-		return nil, domain.ErrArticleNotFound
 	}
 
 	return repository.FindArticleByID(articleID)

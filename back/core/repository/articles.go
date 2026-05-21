@@ -8,7 +8,7 @@ import (
 
 // ArticleRepositoryは、Usecaseから呼び出せるメソッド群を定義する
 type ArticleRepository interface {
-	FindAllArticles() ([]domain.Article, error)
+	FindAllArticles(keyword string) ([]domain.Article, error)
 	FindArticleByID(articleID int) (*domain.Article, error)
 	CreateArticle(request domain.CreateArticleRequest) (*domain.Article, error)
 	UpdateArticle(articleID int, request domain.UpdateArticleRequest) (*domain.Article, error)
@@ -28,8 +28,8 @@ func NewArticleRepository(db *sql.DB) ArticleRepository {
 	}
 }
 
-func (repository *articleRepository) FindAllArticles() ([]domain.Article, error) {
-	rows, err := repository.db.Query(`
+func (repository *articleRepository) FindAllArticles(keyword string) ([]domain.Article, error) {
+	query := `
 		SELECT
 			id,
 			title,
@@ -37,8 +37,23 @@ func (repository *articleRepository) FindAllArticles() ([]domain.Article, error)
 			DATE_FORMAT(created_at, '%Y%m%d') AS created_at,
 			DATE_FORMAT(updated_at, '%Y%m%d') AS updated_at
 		FROM articles
+	`
+
+	args := []any{}
+
+	if keyword != "" {
+		query += `
+			WHERE title LIKE ? OR text LIKE ?
+		`
+		likeKeyword := "%" + keyword + "%"
+		args = append(args, likeKeyword, likeKeyword)
+	}
+
+	query += `
 		ORDER BY created_at DESC, id DESC
-	`)
+	`
+
+	rows, err := repository.db.Query(query, args...)
 	if err != nil {
 		return nil, err
 	}

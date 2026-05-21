@@ -24,7 +24,9 @@ func NewArticleController(articleUsecase usecase.ArticleUsecase) *ArticleControl
 }
 
 func (controller *ArticleController) GetAllArticles(ctx echo.Context) error {
-	articles, err := controller.articleUsecase.GetAllArticles()
+	keyword := ctx.QueryParam("keyword")
+
+	articles, err := controller.articleUsecase.GetAllArticles(keyword)
 	if err != nil {
 		return ctx.JSON(http.StatusInternalServerError, map[string]string{
 			"message": "failed to get all articles",

@@ -7,7 +7,7 @@ import (
 
 // ArticleUsecaseは、Controllerから呼び出せるメソッド群を定義する
 type ArticleUsecase interface {
-	GetAllArticles() ([]domain.Article, error)
+	GetAllArticles(keyword string) ([]domain.Article, error)
 	GetArticleByID(articleID int) (*domain.Article, error)
 	PostArticle(request domain.CreateArticleRequest) (*domain.Article, error)
 	PatchArticle(articleID int, request domain.UpdateArticleRequest) (*domain.Article, error)
@@ -27,8 +27,8 @@ func NewArticleUsecase(articleRepository repository.ArticleRepository) ArticleUs
 	}
 }
 
-func (usecase *articleUsecase) GetAllArticles() ([]domain.Article, error) {
-	return usecase.articleRepository.FindAllArticles()
+func (usecase *articleUsecase) GetAllArticles(keyword string) ([]domain.Article, error) {
+	return usecase.articleRepository.FindAllArticles(keyword)
 }
 
 func (usecase *articleUsecase) GetArticleByID(articleID int) (*domain.Article, error) {

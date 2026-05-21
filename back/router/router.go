@@ -19,4 +19,13 @@ func SetupRouter(e *echo.Echo, db *sql.DB) {
 	e.POST("/articles", articleController.PostArticle)
 	e.PATCH("/articles/:id", articleController.PatchArticle)
 	e.DELETE("/articles/:id", articleController.DeleteArticle)
+
+	tagRepository := repository.NewTagRepository(db)
+	tagUsecase := usecase.NewTagUsecase(tagRepository)
+	tagController := controller.NewTagController(tagUsecase)
+	e.GET("/tags", tagController.GetAllTags)
+	e.GET("/tags/:id", tagController.GetTagByID)
+	e.POST("/tags", tagController.PostTag)
+	e.PATCH("/tags/:id", tagController.PatchTag)
+	e.DELETE("/tags/:id", tagController.DeleteTag)
 }

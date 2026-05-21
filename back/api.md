@@ -1,8 +1,8 @@
 # DB Schemes
 ## articles
-| id | | title | text | created | updated |
+| id | title | text | created | updated |
 | ---- | ---- | ---- | ---- | ---- |
-| 1 | 山岡家背油トッピング | ## 山岡家は食べ過ぎると腹壊します。\n\n| tokuseimiso |\n| --- |\n| 特製味噌 |\n\n![山岡家のラーメン](https://images.unsplash.com/photo-1569718212165-3a8278d5f624)\n\n背脂トッピングは満足度が高いですが、食べすぎ注意です。\n | 2026-05-18 | 2026-05-20 |
+| 1 | 山岡家背油トッピング | Markdown | 2026-05-18 | 2026-05-20 |
 
 ## tags
 | id | name |
@@ -25,29 +25,44 @@
 ### articles
 - `GET /articles`　**article全件取得**
 Article[]型のJSONを返す。
-`Invoke-RestMethod -Method Get -Uri "http://localhost:8080/articles"`
+**`Invoke-RestMethod -Method Get -Uri "http://localhost:8080/articles"`**
 
 - `GET /articles/:id`　**article id指定取得**
 Paramでidを送り、Article型のJSONを返す。
 **動作確認:`Invoke-RestMethod -Method Get -Uri "http://localhost:8080/articles/1"`**
 
 - `POST /articles`　**article新規追加**
-JSONでタイトルと本文を送り、Article型のJSONを返す。
+CreateArticleRequest型のJSONでタイトルと本文を送り、Article型のJSONを返す。
 **動作確認:`Invoke-RestMethod -Method Post -Uri "http://localhost:8080/articles" -ContentType "application/json" -Body (@{ title = "title"; text = "text" } | ConvertTo-Json)`**
 
 - `PATCH /articles/:id`　**article編集**
-JSONでタイトルと本文を送り、Article型のJSONを返す。
+UpdateArticleRequest型JSONでタイトルと本文を送り、Article型のJSONを返す。
 **動作確認:`Invoke-RestMethod -Method Patch -Uri "http://localhost:8080/articles/1" -ContentType "application/json" -Body (@{ title = "updated title"; text = "updated text" } | ConvertTo-Json)`**
 
 - `DELETE /articles/:id`　**article削除**
-Paramでidを送り、削除したDeleteArticleResponse型のJSONを返す。
+Paramでidを送り、削除結果を表すDeleteArticleResponse型のJSONを返す。
 **動作確認:`Invoke-RestMethod -Method Delete -Uri "http://localhost:8080/articles/1"`**
 
 ### tags
-`GET /tags`　**tag全件取得**
-`POST /tags`　**tag新規追加**
-`PATCH /tags/:id`　**tag編集**
-`DELETE /tags/:id`　**tag削除**
+- `GET /tags`　**tag全件取得**
+Tag[]型のJSONを返す。
+**動作確認:`Invoke-RestMethod -Method Get -Uri "http://localhost:8080/tags"`**
+
+- `GET /tags/:id`　**tag id指定取得**
+Paramでidを送り、Tag型のJSONを返す。
+**動作確認:`Invoke-RestMethod -Method Get -Uri "http://localhost:8080/tags/1"`**
+
+- `POST /tags`　**tag新規追加**
+CreateTagRequest型JSONでタグの名前を送り、Tag型のJSONを返す。
+**動作確認:`Invoke-RestMethod -Method Post -Uri "http://localhost:8080/tags" -ContentType "application/json" -Body (@{ name = "name" } | ConvertTo-Json)`**
+
+- `PATCH /tags/:id`　**tag編集**
+UpdateTagRequest型JSONでタグの名前を送り、Tag型のJSONを返す。
+**動作確認:`Invoke-RestMethod -Method Patch -Uri "http://localhost:8080/tags/1" -ContentType "application/json" -Body (@{ name = "updated name" } | ConvertTo-Json)`**
+
+- `DELETE /tags/:id`　**tag削除**
+Paramでidを送り、削除結果を表すDeleteTagResponse型のJSONを返す。
+**動作確認:`Invoke-RestMethod -Method Delete -Uri "http://localhost:8080/tags/1"`**
 
 ### article_tags
 `GET /articles/:id/tags`　**articleに紐づいたtagの取得**

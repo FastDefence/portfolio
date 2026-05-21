@@ -24,8 +24,8 @@
 # APIs
 ### articles
 - `GET /articles`　**article全件取得**
-Article[]型のJSONを返す。
-**`Invoke-RestMethod -Method Get -Uri "http://localhost:8080/articles"`**
+Article[]型のJSONを返す。また、クエリパラメーターがついていれば、記事をタイトル、本文ベースで検索する。
+**`Invoke-RestMethod -Method Get -Uri "http://localhost:8080/articles[?name=text]"`**
 
 - `GET /articles/:id`　**article id指定取得**
 Paramでidを送り、Article型のJSONを返す。
@@ -45,8 +45,8 @@ Paramでidを送り、削除結果を表すDeleteArticleResponse型のJSONを返
 
 ### tags
 - `GET /tags`　**tag全件取得**
-Tag[]型のJSONを返す。
-**動作確認:`Invoke-RestMethod -Method Get -Uri "http://localhost:8080/tags"`**
+Tag[]型のJSONを返す。また、クエリパラメーターがついていてば、タグを検索する。
+**動作確認:`Invoke-RestMethod -Method Get -Uri "http://localhost:8080/tags[?name=text]"`**
 
 - `GET /tags/:id`　**tag id指定取得**
 Paramでidを送り、Tag型のJSONを返す。

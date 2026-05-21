@@ -23,28 +23,42 @@
 
 # APIs
 ### articles
-GET    /articles　article全件取得
-GET    /articles/:id　article id指定取得
-POST   /articles　article新規追加
-PATCH  /articles/:id　article編集
-DELETE /articles/:id　article削除
+- `GET /articles`　**article全件取得**
+Article[]型のJSONを返す。
+`Invoke-RestMethod -Method Get -Uri "http://localhost:8080/articles"`
+
+- `GET /articles/:id`　**article id指定取得**
+Paramでidを送り、Article型のJSONを返す。
+**動作確認:`Invoke-RestMethod -Method Get -Uri "http://localhost:8080/articles/1"`**
+
+- `POST /articles`　**article新規追加**
+JSONでタイトルと本文を送り、Article型のJSONを返す。
+**動作確認:`Invoke-RestMethod -Method Post -Uri "http://localhost:8080/articles" -ContentType "application/json" -Body (@{ title = "title"; text = "text" } | ConvertTo-Json)`**
+
+- `PATCH /articles/:id`　**article編集**
+JSONでタイトルと本文を送り、Article型のJSONを返す。
+**動作確認:`Invoke-RestMethod -Method Patch -Uri "http://localhost:8080/articles/1" -ContentType "application/json" -Body (@{ title = "updated title"; text = "updated text" } | ConvertTo-Json)`**
+
+- `DELETE /articles/:id`　**article削除**
+Paramでidを送り、削除したDeleteArticleResponse型のJSONを返す。
+**動作確認:`Invoke-RestMethod -Method Delete -Uri "http://localhost:8080/articles/1"`**
 
 ### tags
-GET    /tags　tag全権取得
-POST   /tags　tag新規追加
-PATCH  /tags/:id　tag編集
-DELETE /tags/:id　tag削除
+`GET /tags`　**tag全件取得**
+`POST /tags`　**tag新規追加**
+`PATCH /tags/:id`　**tag編集**
+`DELETE /tags/:id`　**tag削除**
 
 ### article_tags
-GET    /articles/:id/tags　articleに紐づいたtagの取得
-PUT    /articles/:id/tags　articleに紐づくtag一覧の更新
-DELETE　/articles/:article_id/tags/:tag_id　articleに紐づくtagの中から、idを指定して削除
+`GET /articles/:id/tags`　**articleに紐づいたtagの取得**
+`PUT /articles/:id/tags`　**articleに紐づくtag一覧の更新**
+`DELETE /articles/:article_id/tags/:tag_id`　**articleに紐づくtagの中から、idを指定して削除**
 
 ### references
-GET    /articles/:id/references　articleに紐づくreferenceの取得
-POST   /articles/:id/references　articleに紐づくreferenceの新規追加
-PATCH  /references/:id　referenceの編集
-DELETE /references/:id　referenceの削除
+`GET /articles/:id/references`　**articleに紐づくreferenceの取得**
+`POST /articles/:id/references`　**articleに紐づくreferenceの新規追加**
+`PATCH /references/:id`　**referenceの編集**
+`DELETE /references/:id`　**referenceの削除**
 
 # DTO
     {

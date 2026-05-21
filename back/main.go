@@ -17,6 +17,8 @@ import (
 )
 
 func main() {
+	time.Local = time.FixedZone("JST", 9*60*60)
+
 	_ = godotenv.Load()
 
 	db, err := connectDBWithRetry()

@@ -23,7 +23,7 @@ export default async function ArticlesID({ params }: ArticlePageProps){
                 <div className="flex mr-2">
                     <p>tags:</p>
                     {article.tags.map((tag) => (
-                        <div key="{tag.id}" className="rounded-full border border-gray-400 px-2">{tag}</div>
+                        <div key={tag} className="rounded-full border border-gray-400 px-2">{tag}</div>
                     ))}
                 </div>
                 <div className="mr-2">created: {article.created}</div>
@@ -32,7 +32,7 @@ export default async function ArticlesID({ params }: ArticlePageProps){
                     <p className="mr-2">references:</p>
                     <ul>
                         {article.references.map((reference) => (
-                            <li key="{reference.url}">
+                            <li key={reference.url}>
                                 <a href={reference.url} target="_blank" rel="noreferrer" className="hover:underline">{reference.title}</a>
                             </li>
                         ))}

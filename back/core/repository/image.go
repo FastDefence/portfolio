@@ -72,7 +72,14 @@ func (r *imageRepository) Upload(path string, file multipart.File, fileHeader *m
 func (r *imageRepository) List(directoryPath string) ([]string, error) {
 	listURL := r.filerInternalURL + directoryPath + "?pretty=y"
 
-	response, err := r.httpClient.Get(listURL)
+	request, err := http.NewRequest(http.MethodGet, listURL, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	request.Header.Set("Accept", "application/json")
+
+	response, err := r.httpClient.Do(request)
 	if err != nil {
 		return nil, err
 	}
@@ -87,6 +94,11 @@ func (r *imageRepository) List(directoryPath string) ([]string, error) {
 		return nil, fmt.Errorf("failed to list images: status=%d body=%s", response.StatusCode, string(responseBody))
 	}
 
+	responseBody, err := io.ReadAll(response.Body)
+	if err != nil {
+		return nil, err
+	}
+
 	var filerResponse struct {
 		Entries []struct {
 			FullPath    string `json:"FullPath"`
@@ -95,8 +107,8 @@ func (r *imageRepository) List(directoryPath string) ([]string, error) {
 		} `json:"Entries"`
 	}
 
-	if err := json.NewDecoder(response.Body).Decode(&filerResponse); err != nil {
-		return nil, err
+	if err := json.Unmarshal(responseBody, &filerResponse); err != nil {
+		return nil, fmt.Errorf("failed to decode filer response: %w body=%s", err, string(responseBody))
 	}
 
 	names := make([]string, 0, len(filerResponse.Entries))

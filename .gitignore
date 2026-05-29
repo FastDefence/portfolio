@@ -109,3 +109,6 @@ data/
 admin/
 
 test.ps1
+
+admin/
+compose.admin.yml

@@ -28,8 +28,8 @@ services:
     build:
       context: ./back
       dockerfile: Dockerfile
-    expose:
-      - "8080"
+    ports:
+      - "8080:8080"
     volumes:
       - ./back:/app
       - go-mod-cache:/go/pkg/mod

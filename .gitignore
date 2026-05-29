@@ -104,5 +104,6 @@ data/
 # Misc
 # --------------------
 .cache/
+.png
 
 test.ps1

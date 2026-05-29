@@ -17,9 +17,6 @@ services:
     command: "volume -mserver=seaweed-master:9333 -ip=seaweed-volume -port=8080 -dir=/data"
     depends_on:
       - seaweed-master
-    ports:
-      - "8080:8080"
-      - "18080:18080"
     volumes:
       - seaweed-volume-data:/data
     networks:

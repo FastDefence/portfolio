@@ -106,5 +106,6 @@ data/
 # --------------------
 .cache/
 *.png
+admin/
 
 test.ps1

@@ -3,9 +3,9 @@ services:
     image: chrislusf/seaweedfs:latest
     container_name: seaweed-master
     command: "master -ip=seaweed-master -port=9333"
-    ports:
-      - "9333:9333"
-      - "19333:19333"
+    expose:
+      - "9333"
+      - "19333"
     volumes:
       - seaweed-master-data:/data
     networks:
@@ -17,6 +17,9 @@ services:
     command: "volume -mserver=seaweed-master:9333 -ip=seaweed-volume -port=8080 -dir=/data"
     depends_on:
       - seaweed-master
+    expose:
+      - "8080"
+      - "18080"
     volumes:
       - seaweed-volume-data:/data
     networks:
@@ -29,9 +32,9 @@ services:
     depends_on:
       - seaweed-master
       - seaweed-volume
-    ports:
-      - "8888:8888"
-      - "18888:18888"
+    expose:
+      - "8888"
+      - "18888"
     volumes:
       - seaweed-filer-data:/data
     networks:

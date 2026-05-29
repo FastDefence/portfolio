@@ -28,8 +28,8 @@ services:
     build:
       context: ./back
       dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
+    expose:
+      - "8080"
     volumes:
       - ./back:/app
       - go-mod-cache:/go/pkg/mod
@@ -44,8 +44,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: portfolio_db
-    ports:
-      - "3306:3306"
+    expose:
+      - "3306"
     volumes:
       - mysql-data:/var/lib/mysql
     restart: unless-stopped

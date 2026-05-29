@@ -101,7 +101,7 @@ func (u *imageUsecase) buildImageResponse(docType string, id string, name string
 		Name:     name,
 		Path:     imagePath,
 		URL:      imageURL,
-		Markdown: fmt.Sprintf("![%s](%s \"%s\")", title, imageURL, title),
+		Markdown: fmt.Sprintf("![%s](%s \"%s\")", title, imagePath, title),
 	}
 }
 

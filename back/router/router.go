@@ -2,6 +2,7 @@ package router
 
 import (
 	"database/sql"
+	"os"
 
 	"portfolio-back/core/controller"
 	"portfolio-back/core/repository"
@@ -46,4 +47,26 @@ func SetupRouter(e *echo.Echo, db *sql.DB) {
 	e.POST("/tags", tagController.PostTag)
 	e.PATCH("/tags/:id", tagController.PatchTag)
 	e.DELETE("/tags/:id", tagController.DeleteTag)
+
+	imageRepository := repository.NewImageRepository(
+		getEnv("SEAWEED_FILER_INTERNAL_URL", "http://seaweed-filer:8888"),
+	)
+	imageUsecase := usecase.NewImageUsecase(
+		imageRepository,
+		getEnv("IMAGE_PUBLIC_BASE_URL", "http://localhost:8888"),
+	)
+	imageController := controller.NewImageController(imageUsecase)
+
+	e.POST("/articles/:id/images", imageController.PostArticleImage)
+	e.GET("/articles/:id/images", imageController.GetArticleImages)
+	e.DELETE("/articles/:id/images/:name", imageController.DeleteArticleImage)
+}
+
+func getEnv(key string, defaultValue string) string {
+	value := os.Getenv(key)
+	if value == "" {
+		return defaultValue
+	}
+
+	return value
 }

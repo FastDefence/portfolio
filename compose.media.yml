@@ -1,0 +1,51 @@
+services:
+  seaweed-master:
+    image: chrislusf/seaweedfs:latest
+    container_name: seaweed-master
+    command: "master -ip=seaweed-master -port=9333"
+    ports:
+      - "9333:9333"
+      - "19333:19333"
+    volumes:
+      - seaweed-master-data:/data
+    networks:
+      - portfolio_default
+
+  seaweed-volume:
+    image: chrislusf/seaweedfs:latest
+    container_name: seaweed-volume
+    command: "volume -mserver=seaweed-master:9333 -ip=seaweed-volume -port=8080 -dir=/data"
+    depends_on:
+      - seaweed-master
+    ports:
+      - "8080:8080"
+      - "18080:18080"
+    volumes:
+      - seaweed-volume-data:/data
+    networks:
+      - portfolio_default
+
+  seaweed-filer:
+    image: chrislusf/seaweedfs:latest
+    container_name: seaweed-filer
+    command: "filer -master=seaweed-master:9333 -ip=seaweed-filer -port=8888"
+    depends_on:
+      - seaweed-master
+      - seaweed-volume
+    ports:
+      - "8888:8888"
+      - "18888:18888"
+    volumes:
+      - seaweed-filer-data:/data
+    networks:
+      - portfolio_default
+
+volumes:
+  seaweed-master-data:
+  seaweed-volume-data:
+  seaweed-filer-data:
+
+networks:
+  portfolio_default:
+    external: true
+    name: portfolio_default

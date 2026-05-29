@@ -17,7 +17,11 @@ export default function ArticleDraftEditor({
     onTextChange,
 }: ArticleDraftEditorProps) {
     return (
-        <>
+        <div className="mb-8 border border-gray-400 bg-gray-50 p-4">
+            <h2 className="mb-3 border-b border-gray-300 pb-1 text-xl font-bold">
+                記事本文編集
+            </h2>
+
             <div className="mb-4">
                 <label className="mb-1 block text-sm font-bold">
                     タイトル
@@ -25,7 +29,7 @@ export default function ArticleDraftEditor({
                 <input
                     value={title}
                     onChange={(event) => onTitleChange(event.target.value)}
-                    className="w-full border border-gray-400 px-3 py-2"
+                    className="w-full border border-gray-400 bg-white px-3 py-2"
                     placeholder="記事タイトル"
                 />
             </div>
@@ -37,7 +41,7 @@ export default function ArticleDraftEditor({
                 <textarea
                     value={text}
                     onChange={(event) => onTextChange(event.target.value)}
-                    className="min-h-[360px] w-full border border-gray-400 px-3 py-2 font-mono"
+                    className="min-h-[360px] w-full border border-gray-400 bg-white px-3 py-2 font-mono"
                     placeholder="Markdownで本文を書く"
                 />
             </div>
@@ -47,7 +51,7 @@ export default function ArticleDraftEditor({
                     プレビュー
                 </h2>
 
-                <div className="rounded border border-gray-400 p-4">
+                <div className="rounded border border-gray-400 bg-white p-4">
                     <ReactMarkdown
                         remarkPlugins={[remarkGfm]}
                         components={{
@@ -90,6 +94,6 @@ export default function ArticleDraftEditor({
                     </ReactMarkdown>
                 </div>
             </div>
-        </>
+        </div>
     );
 }

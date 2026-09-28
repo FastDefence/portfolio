@@ -1,11 +1,11 @@
 services:
   front:
     build:
-      context: ./front
+      context: ./user
       dockerfile: Dockerfile
     volumes:
       - type: bind
-        source: ./front
+        source: ./user
         target: /app
       - type: volume
         source: front_node_modules
@@ -26,15 +26,15 @@ services:
 
   api:
     build:
-      context: ./back
+      context: ./api
       dockerfile: Dockerfile
     expose:
       - "8080"
     volumes:
-      - ./back:/app
+      - ./api:/app
       - go-mod-cache:/go/pkg/mod
     env_file:
-      - ./back/.env
+      - ./api/.env
     depends_on:
       - mysql
     restart: unless-stopped

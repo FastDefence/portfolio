@@ -1,7 +1,7 @@
 services:
   front:
     build:
-      context: ./front
+      context: ./user
       dockerfile: prod.Dockerfile
     ports:
       - 3000:3000
@@ -12,12 +12,12 @@ services:
     restart: unless-stopped
   api:
     build:
-      context: ./back
+      context: ./api
       dockerfile: prod.Dockerfile
     expose:
       - "8080"
     env_file:
-      - ./back/.env
+      - ./api/.env
     depends_on:
       - mysql
     restart: unless-stopped

@@ -1,13 +1,14 @@
 $ErrorActionPreference = "Stop"
 
-$ComposeFile = "compose.prod.yml"
+$ProjectRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
+$ComposeFile = Join-Path $ProjectRoot "compose.prod.yml"
 $DbService = "mysql"
 
 $DbUser = if ($env:MYSQL_USER) { $env:MYSQL_USER } else { "root" }
 $DbPassword = if ($env:MYSQL_PASSWORD) { $env:MYSQL_PASSWORD } else { "password" }
 $DbName = if ($env:MYSQL_DATABASE) { $env:MYSQL_DATABASE } else { "portfolio_db" }
 
-$MigrationDir = ".\back\mysql\migration"
+$MigrationDir = Join-Path $PSScriptRoot "mysql\migration"
 
 $MigrationFiles = @(
     "01_articles.sql",

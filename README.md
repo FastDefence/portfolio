@@ -7,4 +7,4 @@ DB: Mysql
 
 front: 公開用ポートフォリオサイト。
 admin: 記事の追加や削除など。
-back: back/api.mdに使用が記載。
+api: api/api.mdに仕様が記載。

@@ -23,7 +23,7 @@ services:
       dockerfile: prod.Dockerfile
     expose: ["8080"]
     env_file: ./.env
-    depends_on: [mysql]
+    depends_on: [mysql, seaweed-filer]
     restart: unless-stopped
 
   mysql:
@@ -40,5 +40,34 @@ services:
       retries: 10
     restart: unless-stopped
 
+  seaweed-master:
+    image: chrislusf/seaweedfs:4.47
+    command: "master -ip=seaweed-master -port=9333"
+    expose: ["9333", "19333"]
+    volumes:
+      - seaweed-master-data:/data
+    restart: unless-stopped
+
+  seaweed-volume:
+    image: chrislusf/seaweedfs:4.47
+    command: "volume -mserver=seaweed-master:9333 -ip=seaweed-volume -port=8080 -dir=/data"
+    depends_on: [seaweed-master]
+    expose: ["8080", "18080"]
+    volumes:
+      - seaweed-volume-data:/data
+    restart: unless-stopped
+
+  seaweed-filer:
+    image: chrislusf/seaweedfs:4.47
+    command: "filer -master=seaweed-master:9333 -ip=seaweed-filer -port=8888"
+    depends_on: [seaweed-master, seaweed-volume]
+    expose: ["8888", "18888"]
+    volumes:
+      - seaweed-filer-data:/data
+    restart: unless-stopped
+
 volumes:
   mysql-data:
+  seaweed-master-data:
+  seaweed-volume-data:
+  seaweed-filer-data:

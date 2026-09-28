@@ -136,8 +136,8 @@ func (repository *articleTagRepository) existsArticle(tx *sql.Tx, articleID int)
 	err := tx.QueryRow(`
 		SELECT EXISTS(
 			SELECT 1
-			FROM articles
-			WHERE id = ?
+			FROM posts
+			WHERE id = ? AND kind = 'article'
 		)
 	`, articleID).Scan(&exists)
 	if err != nil {

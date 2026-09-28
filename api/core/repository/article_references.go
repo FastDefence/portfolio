@@ -185,8 +185,8 @@ func (repository *referenceRepository) existsArticle(articleID int) (bool, error
 	err := repository.db.QueryRow(`
 		SELECT EXISTS(
 			SELECT 1
-			FROM articles
-			WHERE id = ?
+			FROM posts
+			WHERE id = ? AND kind = 'article'
 		)
 	`, articleID).Scan(&exists)
 	if err != nil {

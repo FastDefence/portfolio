@@ -41,6 +41,16 @@ func SetupRouter(e *echo.Echo, db *sql.DB) {
 	e.PATCH("/articles/:id", articleController.PatchArticle, adminOnly)
 	e.DELETE("/articles/:id", articleController.DeleteArticle, adminOnly)
 
+	dailyRepository := repository.NewDailyRepository(db)
+	dailyUsecase := usecase.NewDailyUsecase(dailyRepository)
+	dailyController := controller.NewDailyController(dailyUsecase)
+
+	e.GET("/dailies", dailyController.GetAllDailies)
+	e.GET("/dailies/:id", dailyController.GetDailyByID)
+	e.POST("/dailies", dailyController.PostDaily, adminOnly)
+	e.PATCH("/dailies/:id", dailyController.PatchDaily, adminOnly)
+	e.DELETE("/dailies/:id", dailyController.DeleteDaily, adminOnly)
+
 	tagRepository := repository.NewTagRepository(db)
 	tagUsecase := usecase.NewTagUsecase(tagRepository)
 	tagController := controller.NewTagController(tagUsecase)

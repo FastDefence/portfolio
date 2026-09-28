@@ -13,39 +13,33 @@ services:
       - type: volume
         source: front_next
         target: /app/.next
+    env_file: ./.env
     environment:
       WATCHPACK_POLLING: "true"
       CHOKIDAR_USEPOLLING: "true"
-      API_BASE_URL: http://api:8080
     command: sh -c "npm install && npm run dev"
-    ports:
-      - "3000:3000"
-    depends_on:
-      - api
+    ports: ["3000:3000"]
+    depends_on: [api]
     restart: unless-stopped
 
   api:
     build:
       context: ./api
       dockerfile: Dockerfile
-    expose:
-      - "8080"
+    expose: ["8080"]
     volumes:
       - ./api:/app
       - go-mod-cache:/go/pkg/mod
-    env_file:
-      - ./api/.env
-    depends_on:
-      - mysql
+    env_file: ./.env
+    depends_on: [mysql]
     restart: unless-stopped
 
   mysql:
     image: mysql:8.4
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: portfolio_db
-    expose:
-      - "3306"
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    expose: ["3306"]
     volumes:
       - mysql-data:/var/lib/mysql
     restart: unless-stopped

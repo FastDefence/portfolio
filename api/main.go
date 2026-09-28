@@ -19,7 +19,9 @@ import (
 func main() {
 	time.Local = time.FixedZone("JST", 9*60*60)
 
-	_ = godotenv.Load()
+	// Keep local development configuration at the project root. Environment
+	// variables supplied by Docker or the shell take precedence over this file.
+	_ = godotenv.Load(".env", "../.env")
 
 	db, err := connectDBWithRetry()
 	if err != nil {

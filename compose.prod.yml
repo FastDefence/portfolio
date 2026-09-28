@@ -3,30 +3,24 @@ services:
     build:
       context: ./user
       dockerfile: prod.Dockerfile
-    ports:
-      - 3000:3000
-    environment:
-      API_BASE_URL: http://api:8080
-    depends_on:
-      - api
+    ports: ["3000:3000"]
+    env_file: ./.env
+    depends_on: [api]
     restart: unless-stopped
   api:
     build:
       context: ./api
       dockerfile: prod.Dockerfile
-    expose:
-      - "8080"
-    env_file:
-      - ./api/.env
-    depends_on:
-      - mysql
+    expose: ["8080"]
+    env_file: ./.env
+    depends_on: [mysql]
     restart: unless-stopped
 
   mysql:
     image: mysql:8.4
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: portfolio_db
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
     volumes:
       - mysql-data:/var/lib/mysql
     healthcheck:

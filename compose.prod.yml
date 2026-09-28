@@ -1,5 +1,5 @@
 services:
-  front:
+  user:
     build:
       context: ./user
       dockerfile: prod.Dockerfile
@@ -7,6 +7,16 @@ services:
     env_file: ./.env
     depends_on: [api]
     restart: unless-stopped
+
+  admin:
+    build:
+      context: ./admin
+      dockerfile: prod.Dockerfile
+    ports: ["127.0.0.1:3001:3000"]
+    env_file: ./.env
+    depends_on: [api]
+    restart: unless-stopped
+
   api:
     build:
       context: ./api

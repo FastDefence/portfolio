@@ -1,4 +1,4 @@
-/** @type {import('next').NextConfig} */
+/** @type {import("next").NextConfig} */
 const nextConfig = {
   reactCompiler: true,
   turbopack: {
@@ -12,15 +12,6 @@ const nextConfig = {
         destination: "http://seaweed-filer:8888/article/:path*",
       },
     ];
-  },
-
-  images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-      },
-    ],
   },
 };
 

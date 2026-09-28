@@ -87,7 +87,6 @@ tmp/
 # Docker
 # --------------------
 docker-compose.override.yml
-compose.admin.yml
 
 # ローカルDBやボリュームをディレクトリで持つ場合
 mysql/data/
@@ -106,9 +105,4 @@ data/
 # --------------------
 .cache/
 *.png
-admin/
-
 test.ps1
-
-admin/
-compose.admin.yml

@@ -1,5 +1,5 @@
 services:
-  front:
+  user:
     build:
       context: ./user
       dockerfile: Dockerfile
@@ -8,10 +8,10 @@ services:
         source: ./user
         target: /app
       - type: volume
-        source: front_node_modules
+        source: user_node_modules
         target: /app/node_modules
       - type: volume
-        source: front_next
+        source: user_next
         target: /app/.next
     env_file: ./.env
     environment:
@@ -19,6 +19,22 @@ services:
       CHOKIDAR_USEPOLLING: "true"
     command: sh -c "npm install && npm run dev"
     ports: ["3000:3000"]
+    depends_on: [api]
+    restart: unless-stopped
+
+  admin:
+    build:
+      context: ./admin
+      dockerfile: Dockerfile
+    volumes:
+      - ./admin:/app
+      - admin_node_modules:/app/node_modules
+      - admin_next:/app/.next
+    env_file: ./.env
+    environment:
+      WATCHPACK_POLLING: "true"
+      CHOKIDAR_USEPOLLING: "true"
+    ports: ["127.0.0.1:3001:3000"]
     depends_on: [api]
     restart: unless-stopped
 
@@ -45,7 +61,9 @@ services:
     restart: unless-stopped
 
 volumes:
-  front_node_modules:
-  front_next:
+  user_node_modules:
+  user_next:
+  admin_node_modules:
+  admin_next:
   mysql-data:
   go-mod-cache:

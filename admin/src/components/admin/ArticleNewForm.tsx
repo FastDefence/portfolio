@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import ArticleDraftEditor from "@/components/admin/ArticleDraftEditor";
+import PostDraftEditor from "@/components/admin/PostDraftEditor";
 import TagSelector, { type Tag } from "@/components/admin/TagSelector";
 import ReferenceDraftEditor, { type DraftReference } from "@/components/admin/ReferenceDraftEditor";
 
@@ -97,7 +97,7 @@ export default function ArticleNewForm() {
 
             <ReferenceDraftEditor onChange={setReferences} />
 
-            <ArticleDraftEditor
+            <PostDraftEditor
                 title={title}
                 text={text}
                 onTitleChange={setTitle}

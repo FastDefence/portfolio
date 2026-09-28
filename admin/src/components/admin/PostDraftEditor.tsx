@@ -3,19 +3,19 @@
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-type ArticleDraftEditorProps = {
+type PostDraftEditorProps = {
     title: string;
     text: string;
     onTitleChange: (title: string) => void;
     onTextChange: (text: string) => void;
 };
 
-export default function ArticleDraftEditor({
+export default function PostDraftEditor({
     title,
     text,
     onTitleChange,
     onTextChange,
-}: ArticleDraftEditorProps) {
+}: PostDraftEditorProps) {
     return (
         <div>
             <div className="mb-4">

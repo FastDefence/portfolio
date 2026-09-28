@@ -35,6 +35,9 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                                     <Link href="/articles" className="block px-2 py-1 hover:bg-gray-300">
                                         記事管理
                                     </Link>
+                                    <Link href="/dailies" className="block px-2 py-1 hover:bg-gray-300">
+                                        日記管理
+                                    </Link>
                                 </div>
                             </nav>
                         </aside>

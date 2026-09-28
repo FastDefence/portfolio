@@ -3,7 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import type { Article } from "@/lib/articles";
-import ArticleDraftEditor from "@/components/admin/ArticleDraftEditor";
+import PostDraftEditor from "@/components/admin/PostDraftEditor";
 import TagSelector from "@/components/admin/TagSelector";
 import ReferenceEditor from "@/components/admin/ReferenceEditor";
 import ImageEditor from "@/components/admin/ImageEditor";
@@ -99,7 +99,7 @@ export default function ArticleEditForm({ article }: ArticleEditFormProps) {
             />
 
             <form onSubmit={handleSubmit}>
-                <ArticleDraftEditor
+                <PostDraftEditor
                     title={title}
                     text={text}
                     onTitleChange={setTitle}
